@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<center>
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+
+<h2>Users</h2>
+
+<table width="500" border="1" >
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>E-mail</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Roles</th>
+        <th>action</th>
+    </tr>
+    <tbody>
+    <!--    <td align="center" valign="middle"> </td>-->
+    <tr th:each="c : ${users}">
+        <td align="center" valign="middle" th:text="${c.id}"/>
+        <td align="center" valign="middle" th:text="${c.firstName}"/>
+        <td align="center" valign="middle" th:text="${c.lastName}"/>
+        <td align="center" valign="middle" th:text="${c.email}"/>
+        <td align="center" valign="middle" th:text="${c.username}"/>
+        <td align="center" valign="middle" th:text="${c.password}"/>
+        <td align="center" valign="middle"
+        th:each="role : ${c.roles}">
+            &nbsp;<span th:text="${role.name}"/>
+        <td align="center" valign="middle">
+            <a th:href="@{admin/{userid}/edit(userid=${c.id})}">edit</a>
+            <a th:href="@{admin/{userid}/delete(userid=${c.id})}">delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<br/>
+<hr/>
+
+<a align="center" valign="middle" href="/admin/new">Create new user</a>
+
+<br>
+<button class="buttonLogout" onclick="window.location.href = '/logout';">Logout</button>
+
+</body>
+    <center>
+</html>
