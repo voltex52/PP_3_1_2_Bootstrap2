@@ -16,7 +16,7 @@ public class RoleServiceImpl implements RoleService{
         this.roleDAO = roleDAO;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public List<Role> getAllRoles() {
         return roleDAO.getAllRoles();
@@ -28,13 +28,13 @@ public class RoleServiceImpl implements RoleService{
         roleDAO.addRole(role);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public Role findById(long id) {
         return roleDAO.findById(id);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public Set<Role> findByIdRoles(List<Long> roles) {
         return roleDAO.findByIdRoles(roles);

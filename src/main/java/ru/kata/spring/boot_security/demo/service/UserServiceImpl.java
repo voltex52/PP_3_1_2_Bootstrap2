@@ -25,20 +25,20 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public User passwordCoder(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return user;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public List<User> getAllUsers() {
         return userDAO.getAllUsers();
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public User getUserById(int id) {
         return userDAO.getUserById(id);
@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
         userDAO.updateUser(passwordCoder(user));
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public User getUserByLogin(String username) {
         return userDAO.getUserByLogin(username);

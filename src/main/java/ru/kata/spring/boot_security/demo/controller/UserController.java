@@ -1,8 +1,10 @@
 package ru.kata.spring.boot_security.demo.controller;
 
+import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 import java.security.Principal;
@@ -16,8 +18,9 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public String pageForUser (Model model, Principal principal) {
-        model.addAttribute("user",userService.getUserByLogin(principal.getName()));
+    public String pageForUser (Model model,
+                               @CurrentSecurityContext(expression = "authentication.principal") User principal) {
+        model.addAttribute("user",principal);
         return "user-info";
     }
     @GetMapping(value = "/login")
